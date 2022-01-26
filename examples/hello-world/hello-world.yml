@@ -1,34 +1,34 @@
-# GitHub Actions is configured by writing "workflows".
-# Workflows  define sequences of commands written in [YAML](https://en.wikipedia.org/wiki/YAML) and must be
-# located under the directory `.github/workflows/` at the root of your repository.
+# GitHub Actions는 "워크플로우"를 작성하여 사용합니다.
+# 워크플로우는 [YAML](https://en.wikipedia.org/wiki/YAML)형태로 일련의 명령어들을 작성하고
+# 레포지토리 최상단 `.github/workflows/`디렉토리 밑에 존재해야 합니다.
 # ::newline
-# This example workflow prints "Hello world", then "Goodbye".
+# 이 예제는 "Hello world"후 "Goodbye"를 출력하는 예제입니다.
 
 name: hello-world-example
 
 # ::span-comment
-# We must specify what events trigger the workflow to run.
-# In this case we run it every time someone pushes to the repo.
+# 워크플로우를 실행할 이벤트 트리거를 반드시 지정 해야합니다.
+# 이 예제는 누군가 저장소에 푸시 할 때마다 작동합니다.
 on:
   push:
 # ::end-span
 
 jobs:
-  # A `job` specifies a sequence of commands.
-  # We named this job `say-hello`.
+  # `job`은 일련의 명령어들의 명세입니다.
+  # 이 'job'의 이름을 `say-hello`로 지정합니다.
   say-hello:
-    # `job`s can run on [different machines](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on).
+    # `job`은 [다른 환경들](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on)에서도 실행 가능합니다.
     runs-on: ubuntu-latest
-    # `steps` is a list of commands to run.
+    # `steps`은 실행할 명령어들의 리스트 입니다.
     steps:
       -
         name: Say Hello
-        # Finally, do stuff! Run a command using the operating system's shell.
+        # 드디어 뭔가 합니다! 운영 체제의 Shell을 사용하여 명령어를 실행합니다.
         run: echo "Hello world!"
       -
         name: Do stuff
         # ::span-comment
-        # Use the pipe, `|`, to start a multiline string in yaml. This allows us to write easily readable
+        # 파이프(`|`)를 사용하여 yaml안에서 멀티라인을 사용 할 수 있습니다. 멀티라인을 사용하면 가독성이 좋아집니다.
         # multistep code
         run: |
           echo "Step 1..."
