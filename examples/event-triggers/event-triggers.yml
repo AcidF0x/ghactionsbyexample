@@ -25,7 +25,7 @@ on:
     branches:
       # `develop` 브렌치에 PR시
       - 'develop'
-  # 스케쥴 마다 작동, [POSIX cron syntax](https://crontab.guru/)형태로 작성 해야 합니다.
+  # 스케쥴 마다 작동, [POSIX cron](https://crontab.guru/)형태로 작성 해야 합니다.
   schedule:
     - cron: '*/15 * * * *'
 
