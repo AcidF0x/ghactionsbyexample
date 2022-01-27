@@ -1,33 +1,31 @@
 name: event-triggers-example
 
-# The `on` section defines what events trigger the workflow.
-# For an exhaustive list of events and their types, [see here](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#webhook-events).
+# `on` 섹션에서 워크플로우의 이벤트 트리거를 정의합니다.
+# 전체 이벤트 목록 및 이벤트 유형을 보려면 [여기](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#webhook-events)를 확인해보세요.
 on:
-  # Trigger on push to the remote repo
+  # 원격 저장소에 푸시할때 작동
   push:
-    # Optionally include `branches` to trigger the workflow 
-    # only on branches that match the given patterns.
-    branches: 
+    # 옵션으로 `branches`를 추가하여 주어진 패턴과 일치하는 브렌치만 작동하게 할 수 있습니다.
+    branches:
       - 'develop'
-      # A `*` matches zero or more characters, but not the `/` character.
-      # E.g. matches `refs/heads/foo/abc` but not `refs/heads/foo/abc/123`.
+      # `*`는 `/`를 제외하고 0개 이상의 문자가 일치 하는지 확인 합니다.
+      # 아래 패턴은 `refs/heads/foo/abc`는 일치하고 `refs/heads/foo/abc/123`는 일치 하지 않습니다.
       - 'foo/*'
-      # A `**` matches zero or more of any character
-      # E.g. matches `refs/heads/foo/abc` _and_ `refs/heads/foo/abc/123`.
+      # `**`는 0개 이상의 아무 문자가 일치 하는지 확인 합니다
+      # 아래 패턴은 `refs/heads/foo/abc`, `refs/heads/foo/abc/123`둘다 일치 합니다.
       - 'foo/**'
-      # `!` negates a match. E.g. excludes `refs/heads/foo/abc/456`.
-      # More on negative patterns [here](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-using-positive-and-negative-patterns). 
+      # `!`는 일치 하지 않는지 판단합니다, 아래 패턴은 `refs/heads/foo/abc/456`를 제외 합니다.
+      # 더 많은 부정형 패턴은 [여기](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-using-positive-and-negative-patterns)를 확인하세요.
       - '!foo/*/456'
-    # Optionally include `tags` to trigger the workflow
-    # only on tags that match the given patterns
+    # 옵션으로 `tags`를 추가하여 지정된 패턴과 일치하는 태그에만 작동하게 할 수 있습니다.
     tags:
       - '*'
-  # Trigger on pull requests
+  # PR시 작동
   pull_request:
     branches:
-      # Pull requests into `develop` branch
+      # `develop` 브렌치에 PR시
       - 'develop'
-  # Trigger on a schedule, specified with [POSIX cron syntax](https://crontab.guru/)
+  # 스케쥴 마다 작동, [POSIX cron syntax](https://crontab.guru/)형태로 작성 해야 합니다.
   schedule:
     - cron: '*/15 * * * *'
 
