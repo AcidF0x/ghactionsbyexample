@@ -3,7 +3,7 @@ on:
   push:
 
 # ::span-comment
-# Environment variables can be set for the entire workflow.
+# 워크플로우 전체 대한 환경변수를 설정할 수 있습니다.
 env:
   VENI: 'I came'
 # ::end-span
@@ -12,26 +12,24 @@ jobs:
   use-env-vars:
     runs-on: ubuntu-latest
     # ::span-comment
-    # Environment variables can be set for specific jobs.
+    # 특정 작업에 대해 환경 변수를 설정 할 수 있습니다.
     env:
       VIDI: 'I saw'
     # ::end-span
     steps:
       -
         name: Show me the vars
-        # Use your operating system's normal method for reading
-        # environment variables.
+        # 운영체제에서 환경변수를 사용하는 일반적인 방법으로 사용 할 수 있습니다.
         run: echo "$VENI, $VIDI, $VICI"
-        # Environment variables can be set for individual `step`s.
+        # 각 `step`별 환경 변수를 설정 할 수 있습니다.
         env:
           VICI: 'I conquered'
 
       -
         name: Create env var
-        # Set new environment variables by appending a line
-        # to a file whose name is in the `GITHUB_ENV` variable. The variable
-        # will be available in all subsequent `step`s.
-        # Note: the environment won't be updated according to `GITHUB_ENV` until the next step.
+        # `GITHUB_ENV`변수의 파일에 한줄을 추가하여 새로운 환경변수를 설정합니다.
+        # 이 환경 변수는 이후의 모든 `step`에서 사용 가능합니다.
+        # 참고 : 다음 `step`전에는 `GITHUB_ENV`에 따라 환경변수가 업데이트 되지 않습니다.
         run: echo "foo=bar" >> $GITHUB_ENV
 
       -
@@ -39,8 +37,8 @@ jobs:
         run: |
 
         # ::span-comment
-        # There are many environment variables available by default.
-        # Here are a few, [see a full list here](https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables).
+        # 기본적으로 사용할수 있는 환경변수가 많이 있습니다.
+        # 아래 예제는 일부분입니다. [전체 리스트 보기](https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables)를 클릭하여 확인 해보세요.
           echo "Workflow name:  $GITHUB_WORKFLOW
           echo "Workspace:      $GITHUB_WORKSPACE"
           echo "Event:          $GITHUB_EVENT_NAME"
