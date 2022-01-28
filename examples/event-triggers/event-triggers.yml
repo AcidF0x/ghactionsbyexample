@@ -5,13 +5,13 @@ name: event-triggers-example
 on:
   # 원격 저장소에 푸시할때 작동
   push:
-    # 옵션으로 `branches`를 추가하여 주어진 패턴과 일치하는 브렌치만 작동하게 할 수 있습니다.
+    # 추가로 `branches`를 키워드로 주어진 패턴과 일치하는 브렌치만 작동하게 할 수 있습니다.
     branches:
       - 'develop'
       # `*`는 `/`를 제외하고 0개 이상의 문자가 일치 하는지 확인 합니다.
       # 아래 패턴은 `refs/heads/foo/abc`는 일치하고 `refs/heads/foo/abc/123`는 일치 하지 않습니다.
       - 'foo/*'
-      # `**`는 0개 이상의 아무 문자가 일치 하는지 확인 합니다
+      # `**`는 0개 이상의 문자가 일치 하는지 확인 합니다
       # 아래 패턴은 `refs/heads/foo/abc`, `refs/heads/foo/abc/123`둘다 일치 합니다.
       - 'foo/**'
       # `!`는 일치 하지 않는지 판단합니다, 아래 패턴은 `refs/heads/foo/abc/456`를 제외 합니다.
