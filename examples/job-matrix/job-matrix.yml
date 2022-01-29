@@ -1,5 +1,5 @@
-# You can run multiple jobs with different configurations by using a job `matrix`.
-# Note that jobs defined by a `matrix` run in parallel by default.
+# job `matrix`를 사용하여 다른 설정에서 여러 job을 실행할수있습니다.
+# `matrix`로 정의된 job은 기본적으로 병렬로 실행 되는 점을 유의해야합니다.
 
 name: job-matrix
 on:
@@ -9,17 +9,17 @@ jobs:
   my-job:
     strategy:
       # ::span-comment
-      # The `matrix` keyword is how you define a job matrix.
-      # Each user-defined key is a matrix parameter, here we've defined two: `os` and `node`.
-      # The list of possible values for each parameter are used in a [cartesian product](https://en.wikipedia.org/wiki/Cartesian_product) to create jobs.
-      # This section defines a 2 x 3 matrix of 6 jobs, each with a different combination of `os` and `node`.
+      # `matrix`키워드로 job matrix를 정의합니다.
+      # 각 사용자 정의 키는 matrix 파라미터입니다, 아래 예제는 `os`와 `node` 두가지를 정의 했습니다.
+      # [데카르트 곱](https://ko.wikipedia.org/wiki/%EA%B3%B1%EC%A7%91%ED%95%A9)의 각 파라미터에 가능한 값 목록은 job을 만드는 데 사용됩니다.
+      # 이 섹션은 `os`와 `node`의 각각 다른 조합인 6개의 job으로 구성된 2 x 3 matrix를 정의 합니다.
       matrix:
         os: [ubuntu-16.04, ubuntu-18.04]
         node: [6, 8, 10]
       # ::end-span
 
         # ::span-comment
-        # The `exclude` keyword prevents jobs with specific configurations from running.
+        # 'exclude' 키워드는 실행중 특정 구성에서 job이 실행되지 않도록 합니다.
         exclude:
           -
             os: ubuntu-16.04
@@ -27,17 +27,17 @@ jobs:
         # ::end-span
 
         # ::span-comment
-        # `include` allows you to add new jobs to the `matrix`.
-        # Note that the `include` rules always evaluated after the `exclude` rules.
+        # `include` 키워드를 사용하여 `matrix`에 새로운 job을 추가할 수 있습니다.
+        # `include`은 항상 `exclude` 다음에 평가됩니다.
         include:
           -
             os: macos-latest
             node: 10
         # ::end-span
 
-    # Use `matrix` parameters to configure jobs.
-    # [Context expressions](index.html) are used to insert the parameter value.
-    # This example uses the `os` parameter to set the operating system of the job.
+    # `matrix` 파라미터를 사용하여 job을 설정합니다.
+    # [컨텍스트 표현식](index.html)은 파라미터 값을 삽입하는 데 사용됩니다.
+    # 이 예제에서는 'os' 매개 변수를 사용하여 job의 운영 체제를 설정합니다.
     runs-on: ${{ matrix.os }}
     steps:
       -

@@ -1,4 +1,4 @@
-# Data can be shared between `job`s and `step`s.
+# 데이터는 `job`과 `step`사이에서 공유 됩니다.
 
 name: outputs
 on:
@@ -11,23 +11,23 @@ jobs:
       -
         name: Do Work
         # ::span-comment
-        # Create outputs for a step by writing to stdout in the format of `::set-output name=<name>::<value>`.
-        # A step can have multiple outputs.
+        # `::set-output name=<name>::<value>` 형식으로 표준출력으로 step에 대한 출력을 생성 합니다.
+        # step은 여러 출력을 가질수 있습니다.
         run: |
           echo '::set-output name=FAV_NUMBER::3'
           echo '::set-output name=FAV_COLOR::blue'
         # ::end-span
-        # Steps that create outputs must have unique ids.
+        # step에서 생성된 출력은 반드시 유니크 ID가 있어야 합니다.
         id: abc
       -
         name: Read output
-        # Use the `steps` [context variable](context-variables.html) and step id to get the value
+        # `steps` [컨텍스트 변수](context-variables.html)와 step id로 값을 가져올수 있습니다.
         run: |
           echo "${{steps.abc.outputs.FAV_NUMBER}}"
           echo "${{steps.abc.outputs.FAV_COLOR}}"
     # ::span-comment
-    # Create outputs for a job which will be available to other jobs that `needs` it (see [Job Ordering](job-ordering.html)).
-    # You can include output from `step`s that ran for the job.
+    # 해당 job을 `need`에 포함한 다른 job에 사용 할 수 있도록 출력을 생성합니다. (참고 [Job Ordering](job-ordering.html)
+    # job에서 실행된 `step`의 출력을 포함 할수있습니다.
     outputs:
       fav-animal: tiger
       fav-number: ${{steps.abc.outputs.FAV_NUMBER}}
@@ -38,7 +38,7 @@ jobs:
     needs: job1
     steps:
       # ::span-comment
-      # Use context expressions to grab outputs from a job included in `needs` (see [Job Ordering](job-ordering.html))
+      # 컨텍스트 표현식을 사용하여 `needs`에 포함된 job에서 출력을 가져올수 있습니다. (참고 [Job Ordering](job-ordering.html))
       - run: |
         echo "${{needs.job1.outputs.fav-animal}}"
         echo "${{needs.job1.outputs.fav-number}}"
